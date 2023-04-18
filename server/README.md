@@ -1,9 +1,9 @@
-# Challenge-Guada
+# Challenge-Gualda
 
 
 Backend Challenge
 
-Se requiere realizar una REST API con motivo a las películas de Star Wars.
+Se requiere realizar una REST API.
 
 Fuente de datos:
 Se deberá hacer uso de base de datos MongoDB.
