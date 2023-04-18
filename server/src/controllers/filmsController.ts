@@ -13,7 +13,7 @@ import { Request, Response } from "express";
 import { deleteFilmById, Film } from "../models/Films";
 import { handleHttp } from "../utils/error.handle";
 
-const getFilm = async (req: Request, res: Response) =>{
+const getFilm = async (_req: Request, res: Response) =>{
   try{
   const allFilms = await Film.find();
 
