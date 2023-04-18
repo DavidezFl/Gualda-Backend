@@ -22,6 +22,7 @@ edited: { type: Date, default: Date.now },
 { timestamps: false }
 );
 
-const Planet = mongoose.model("Planet", planetSchema);
+export const Planet = mongoose.model("Planet", planetSchema);
 
-export {Planet};
+export const deletePlanetById = (id: string) => Planet.findOneAndDelete({ _id: id});
+
