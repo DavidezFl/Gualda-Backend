@@ -14,12 +14,12 @@ import { handleHttp } from "../utils/error.handle";
 
 const getPlanet = async (req: Request, res: Response) =>{
   try{
-  const allPlanets = await Planet.find();
-
-  return allPlanets 
-  ? res.status(200).send(allPlanets)
-  : res.status(400).send("Planet not found")
-  }catch(e){
+    const allPlanets = await Planet.find().sort({ name: 'asc' });
+    
+    return allPlanets 
+      ? res.status(200).send(allPlanets)
+      : res.status(400).send("Planet not found")
+  } catch(e){
     handleHttp(res, "ERROR_GET_PLANET");
     console.log(e);
   }

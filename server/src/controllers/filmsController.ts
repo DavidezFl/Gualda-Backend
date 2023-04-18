@@ -15,7 +15,7 @@ import { handleHttp } from "../utils/error.handle";
 
 const getFilm = async (_req: Request, res: Response) =>{
   try{
-  const allFilms = await Film.find();
+  const allFilms = await Film.find().sort({ title: 'asc' });;
 
   return allFilms 
   ? res.status(200).send(allFilms)
