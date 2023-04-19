@@ -1,4 +1,4 @@
-# Challenge-Gualda-backend
+# Gualda-backend
 
 Backend Challenge
 
