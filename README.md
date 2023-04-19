@@ -1,6 +1,6 @@
 # Gualda-backend
 
-Backend Challenge
+Backend
 
 npm i typescript -g
 
