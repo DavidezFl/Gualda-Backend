@@ -18,7 +18,7 @@ const getPlanet = async (req: Request, res: Response) =>{
     
     return allPlanets 
       ? res.status(200).send(allPlanets)
-      : res.status(400).send("Planet not found")
+      : res.status(404).json({message: "Planet not found"})
   } catch(e){
     handleHttp(res, "ERROR_GET_PLANET");
     console.log(e);
@@ -30,7 +30,7 @@ const getPlanetById = async (req: Request, res: Response) =>{
   try{
     const planetById = await Planet.findById(id);
 
-    if(!planetById) return res.status(404).send("Planet NOT FOUND");
+    if(!planetById) return res.status(404).json({message: "Planet NOT FOUND"});
 
     res.status(200).send(planetById);
   }catch(e){
@@ -41,6 +41,8 @@ const getPlanetById = async (req: Request, res: Response) =>{
 
 const createPlanet = async ({body}: Request, res: Response) =>{
   const { name, rotation_period, orbital_period, diameter, climate, gravity, terrain, surface_water, population, created, edited } = body;
+  try{
+if(!name) return res.status(400).json({message: "name is required"});
 
   const newPlanet = new Planet({
     name,
@@ -57,7 +59,7 @@ const createPlanet = async ({body}: Request, res: Response) =>{
   });
 
 
-  try{
+  
     const savedPlanet = await newPlanet.save();
     res.status(201).json(savedPlanet);
   }catch(e){

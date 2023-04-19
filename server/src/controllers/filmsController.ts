@@ -19,7 +19,7 @@ const getFilm = async (_req: Request, res: Response) =>{
 
   return allFilms 
   ? res.status(200).send(allFilms)
-  : res.status(400).send("Films not found")
+  : res.status(404).json({message: "Films not found"})
   }catch(e){
     handleHttp(res, "ERROR_GET_FILM");
     console.log(e);
@@ -31,7 +31,7 @@ const getFilmById = async (req: Request, res: Response) =>{
   try{
     const filmById = await Film.findById(id);
 
-    if(!filmById) return res.status(404).send("Film NOT FOUND");
+    if(!filmById) return res.status(404).json({message: "Film NOT FOUND"});
 
     res.status(200).send(filmById);
   }catch(e){
@@ -42,6 +42,8 @@ const getFilmById = async (req: Request, res: Response) =>{
 
 const postFilm = async ({body}: Request, res: Response) =>{
   const { title, episode_id, opening_crawl, director, producer, release_date, created, edited } = body;
+  try{
+if(!title) return res.status(400).json({ message: "Title is required"})
 
   const newFilm = new Film({
     title,
@@ -54,8 +56,6 @@ const postFilm = async ({body}: Request, res: Response) =>{
     edited
   });
 
-
-  try{
     const savedFilm = await newFilm.save();
     res.status(201).json(savedFilm);
   }catch(e){

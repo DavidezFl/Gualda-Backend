@@ -18,7 +18,7 @@ const getStarShip = async (req: Request, res: Response) =>{
     
     return allStarShips 
       ? res.status(200).send(allStarShips)
-      : res.status(400).send("StarShip not found")
+      : res.status(404).json({message: "StarShip not found"})
   } catch(e){
     handleHttp(res, "ERROR_GET_STARSHIP");
     console.log(e);
@@ -30,7 +30,7 @@ const getStarShipById = async (req: Request, res: Response) =>{
   try{
     const starShipId = await StarShip.findById(id);
 
-    if(!starShipId) return res.status(404).send("StarShip NOT FOUND");
+    if(!starShipId) return res.status(404).json({message: "StarShip NOT FOUND"});
 
     res.status(200).send(starShipId);
   }catch(e){
@@ -41,6 +41,8 @@ const getStarShipById = async (req: Request, res: Response) =>{
 
 const createStarShip = async ({body}: Request, res: Response) =>{
   const { name, model, manufacturer, cost_in_credits, length, max_atmosphering_speed, crew, passengers, cargo_capacity,consumables,hyperdrive_rating, MGLT, starship_class, created, edited } = body;
+  try{
+if(!name) return res.status(400).json({ message: "name is required"});
 
   const newStarShip = new StarShip({
     name,
@@ -61,7 +63,7 @@ const createStarShip = async ({body}: Request, res: Response) =>{
   });
 
 
-  try{
+ 
     const savedStarShip = await newStarShip.save();
     res.status(201).json(savedStarShip);
   }catch(e){
