@@ -2,6 +2,13 @@ import  express, { NextFunction, Request, Response }  from "express";
 import cors from "cors";
 import { router } from "./routes";
 import morgan from "morgan";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 min
+  max: 100 // request limit por IP
+});
 
 const app = express();
 
@@ -9,7 +16,9 @@ app.use(cors({
   origin:"*"
 }));
 app.use(express.json());
+app.use(helmet());
 app.use(morgan("dev"));
+app.use(limiter);
 
 app.use("/", router);
 
