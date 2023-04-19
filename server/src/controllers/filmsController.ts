@@ -1,10 +1,10 @@
 /**
- * TODO: RUTAS A CREAR
- * ! Get: All Films
- * ! Get: films por id => id,
- * ! Post: Create Film,
- * ! Update: Update film by id,
- * ! Delete: Delete film by id,
+ * 
+ *  Get: All Films
+ *  Get: films por id => id,
+ *  Post: Create Film,
+ *  Update: Update film by id,
+ *  Delete: Delete film by id,
  *
  */
 
