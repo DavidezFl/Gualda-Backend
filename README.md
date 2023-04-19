@@ -8,7 +8,7 @@ npm i ts-node -g
 
 npm i nodemon -g
 
-Se requiere realizar una REST API
+Se requiere realizar una REST API.
 
 Fuente de datos:
 Se deberá hacer uso de base de datos MongoDB.
