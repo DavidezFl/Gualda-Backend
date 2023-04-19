@@ -1,7 +1,14 @@
-import { Router } from "express";
+import { NextFunction, Request, Response, Router } from "express";
 import { deleteFilm, getFilm, getFilmById, postFilm, updateFilm } from "../controllers/filmsController";
 
 const routerFilm = Router();
+
+const validate = (req: Request, res: Response, next: NextFunction) =>{
+  const { title } = req.body;
+  if(!title) return res.status(404).json({ message: "missing title, Please add the title"});
+  next();
+};
+
 
 
 /**
@@ -81,7 +88,7 @@ routerFilm.get("/:id", getFilmById);
  *           
  * 
  */
-routerFilm.post("/", postFilm);
+routerFilm.post("/", validate, postFilm);
 
 /**
  *  PUT

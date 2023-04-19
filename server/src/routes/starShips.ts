@@ -1,7 +1,16 @@
 import { Router } from "express";
+import {NextFunction, Request, Response}  from "express";
 import { createStarShip, deleteStarShip, getStarShip, getStarShipById, updateStarShip } from "../controllers/starShipsController";
 
 const routerStarShips = Router();
+
+const validate = (req: Request, res: Response, next: NextFunction) =>{
+  const { name } = req.body;
+  if(!name) return res.status(404).json({ message: "missing name, Please add the name"});
+  next();
+};
+
+
 
 /**
  * Get
@@ -79,7 +88,7 @@ routerStarShips.get("/:id", getStarShipById);
  *           
  * 
  */
-routerStarShips.post("/", createStarShip);
+routerStarShips.post("/", validate, createStarShip);
 
 /**
  *  PUT

@@ -1,7 +1,15 @@
-import {Router}  from "express";
+import {NextFunction, Request, Response, Router}  from "express";
 import { createPlanet, deletePlanet, getPlanet, getPlanetById, updatePlanet } from "../controllers/planetsController";
 
 const routerPlanets = Router();
+
+const validate = (req: Request, res: Response, next: NextFunction) =>{
+  const { name } = req.body;
+  if(!name) return res.status(404).json({ message: "missing name, Please add the name"});
+  next();
+};
+
+
 
 /**
  * Get
@@ -78,7 +86,7 @@ routerPlanets.get("/:id", getPlanetById);
  *           
  * 
  */
-routerPlanets.post("/", createPlanet);
+routerPlanets.post("/", validate, createPlanet);
 
 /**
  *  PUT
