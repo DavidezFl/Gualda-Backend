@@ -30,18 +30,18 @@ interface PlanetsData {
 
 interface StarShipsData {
   model: String,
-    manufacturer: String,
-    cost_in_credits: String,
-    length: String,
-    max_atmosphering_speed: String,
-    crew: String,
-    passengers: String,
-    cargo_capacity: Number,
-    consumables: String,
-    hyperdrive_rating: Number,
-    MGLT: Number,
-    starship_class: String,
-    created:Date,
+  manufacturer: String,
+  cost_in_credits: String,
+  length: String,
+  max_atmosphering_speed: String,
+  crew: String,
+  passengers: String,
+  cargo_capacity: Number,
+  consumables: String,
+  hyperdrive_rating: Number,
+  MGLT: Number,
+  starship_class: String,
+  created:Date,
   edited:Date
 }
 
